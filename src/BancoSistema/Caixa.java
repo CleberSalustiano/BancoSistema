@@ -9,7 +9,7 @@ public class Caixa {
 	private int notas100 = 3;
 	private int total;
 	
-	public void liberanotas(int valorSaque) {
+	public void liberanotas(int valorSaque, Pessoa pessoa) {
 		if (valorSaque > atualizaTotal()) {
 			try {
 				throw new ValorMaiorQueTotalException(atualizaTotal());
@@ -17,7 +17,7 @@ public class Caixa {
 				System.out.println(e.getMessage());
 			}
 		}else {
-			combinacaoNotas(valorSaque);
+			combinacaoNotas(valorSaque, pessoa);
 		}
 	}
 	public boolean confereCodigo(String codigo) {
@@ -25,7 +25,8 @@ public class Caixa {
 			return true;
 		else return false;
 	}	
-	private void combinacaoNotas (int valorSaque) {
+	private void combinacaoNotas (int valorSaque, Pessoa pessoa) {
+		int valorSaqueaux = valorSaque;
 		int liberanotas10 = 0; 
 		int liberanotas20 = 0;
 		int liberanotas50 = 0;
@@ -53,8 +54,8 @@ public class Caixa {
 				valorSaque -= 10;
 			}else {
 				try {
-					throw new CombinacaoNotasInexistente();
-				} catch (CombinacaoNotasInexistente e) {
+					throw new CombinacaoNotasInexistenteException();
+				} catch (CombinacaoNotasInexistenteException e) {
 					System.out.println(e.getMessage());
 					break;
 				}
@@ -64,15 +65,18 @@ public class Caixa {
 			this.notas20 = notas20;
 			this.notas50 = notas50;
 			this.notas100 = notas100;
-			imprimiSaque(liberanotas10,liberanotas20,liberanotas50,liberanotas100, valorSaque);
+			pessoa.liberaSaldo(valorSaqueaux);
+			imprimiSaque(liberanotas10,liberanotas20,liberanotas50,liberanotas100, valorSaqueaux, pessoa.getSaldo());
+			
 		}
 	}	
-	private void imprimiSaque(int ln10, int ln20, int ln50, int ln100, int saque) {
+	private void imprimiSaque(int ln10, int ln20, int ln50, int ln100, int saque, int saldo) {
 		System.out.println("Saque de R$" + saque + ",00 concluído!");
 		System.out.println("Notas de 10: " + ln10);
 		System.out.println("Notas de 20: " + ln20);
 		System.out.println("Notas de 50: " + ln50);
 		System.out.println("Notas de 100: " + ln100);
+		System.out.println("Saldo restante: " + saldo + ",00");
 	}	
 	public int atualizaTotal(){
 		return notas10*10 + notas20*20 + notas50*50 + notas100*100;

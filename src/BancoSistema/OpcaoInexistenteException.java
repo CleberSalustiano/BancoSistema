@@ -1,6 +1,6 @@
 package BancoSistema;
 
-public class OpcaoInexistente extends Exception{
+public class OpcaoInexistenteException extends Exception{
 
 	@Override
 	public String getMessage() {

@@ -1,6 +1,6 @@
 package BancoSistema;
 
-public class CombinacaoNotasInexistente extends Exception {
+public class CombinacaoNotasInexistenteException extends Exception {
 
 	@Override
 	public String getMessage() {

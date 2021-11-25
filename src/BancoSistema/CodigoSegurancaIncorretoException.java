@@ -1,10 +1,10 @@
 package BancoSistema;
 
-public class CodigoSegurancaIncorreto extends Exception {
+public class CodigoSegurancaIncorretoException extends Exception {
 
 	private String codigo;
 
-	public CodigoSegurancaIncorreto(String codigo) {
+	public CodigoSegurancaIncorretoException(String codigo) {
 		super();
 		this.codigo = codigo;
 	}
