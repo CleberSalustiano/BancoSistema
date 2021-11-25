@@ -11,7 +11,8 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		ArrayList <Pessoa> pessoas = new ArrayList<>();
 		Pessoa pessoa = new Pessoa();
-		pessoasCadastradas(pessoas);
+		Dados dados = new Dados();
+		dados.pessoasCadastradas(pessoas);
 		pessoa = menuLogin(pessoas, scan);
 		System.out.println("Bem vindo ao Caixa, " + pessoa.getNome());
 		menu(pessoa);
@@ -90,14 +91,6 @@ public class Main {
 			}
 		}
 		return  confere;
-	}
-	private static void pessoasCadastradas(ArrayList <Pessoa> pessoa) {
-		pessoa.add(new Pessoa("Carlos","carlos@email.com","12345",true,200));
-		pessoa.add(new Pessoa("Arthur","arthur@email.com","23456",100));
-		pessoa.add(new Pessoa("Marcos","marcos@email.com","34567",300));
-		pessoa.add(new Pessoa("Cleber","cleber@email.com","12345",1000000));
-		pessoa.add(new Pessoa("Joao","joao@email.com","56789",123));
-		pessoa.add(new Pessoa("Luana","luana@email.com","56789",220));
 	}
 
 	/*private static void verPessoasCadastradas(ArrayList <Pessoa> pessoa) {

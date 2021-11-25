@@ -4,7 +4,7 @@ public class LoginOuSenhaIncorretaException extends Exception {
 
 	@Override
 	public String getMessage() {
-		return "Login e Senha Incorretos";
+		return "Login ou Senha Incorretos";
 	}
 
 		
