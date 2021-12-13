@@ -8,11 +8,9 @@ public class Pessoa {
 	private boolean autorizacao = false;
 	private int saldo;
 	
-	
-	
 	@Override
 	public String toString() {
-		return "Pessoa [nome=" + nome + ", conta=" + conta + ", senha=" + senha + ", saldo=" + saldo + "]";
+		return "Pessoa [conta=" + conta + ", senha=" + senha + "]";
 	}
 	
 	public boolean isAutorizacao() {

@@ -1,16 +1,31 @@
 package BancoSistema;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Dados {
 
 	public void pessoasCadastradas(ArrayList<Pessoa> pessoa) {
-		pessoa.add(new Pessoa("Carlos","carlos@email.com","12345",true,200));
-		pessoa.add(new Pessoa("Arthur","arthur@email.com","23456",100));
-		pessoa.add(new Pessoa("Marcos","marcos@email.com","34567",300));
-		pessoa.add(new Pessoa("Cleber","cleber@email.com","12345",1000000));
-		pessoa.add(new Pessoa("Joao","joao@email.com","56789",123));
-		pessoa.add(new Pessoa("Luana","luana@email.com","56789",220));		
+		File arq = new File("C:\\dados.txt");
+		
+		try {
+			FileReader fileReader = new FileReader(arq);
+			BufferedReader bufferedReader = new BufferedReader (fileReader);
+			String linha = "";
+			
+			while ( ( linha = bufferedReader.readLine() ) != null) {
+		        String[] resLinha = linha.split(", ");
+		        pessoa.add(new Pessoa(resLinha[0], resLinha[1], resLinha[2], Boolean.parseBoolean(resLinha[4]), Integer.parseInt(resLinha[3])));
+			}
+	        fileReader.close();
+	        bufferedReader.close();
+			
+		} catch (Exception e) {
+	    	e.printStackTrace();
+		}
+	
 	}
 
 }
