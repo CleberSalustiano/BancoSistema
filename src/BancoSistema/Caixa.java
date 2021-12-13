@@ -1,5 +1,13 @@
 package BancoSistema;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public class Caixa {
 
 	private String codigoSeguranca = "1234";
@@ -71,7 +79,7 @@ public class Caixa {
 		}
 	}	
 	private void imprimiSaque(int ln10, int ln20, int ln50, int ln100, int saque, int saldo) {
-		System.out.println("Saque de R$" + saque + ",00 concluído!");
+		System.out.println("Saque de R$" + saque + ",00 concluï¿½do!");
 		System.out.println("Notas de 10: " + ln10);
 		System.out.println("Notas de 20: " + ln20);
 		System.out.println("Notas de 50: " + ln50);
@@ -96,4 +104,48 @@ public class Caixa {
 			System.out.println(quantidade + " notas de 100 abastecidos");
 		}				
 	}	
+	
+	public void lerNotas() {
+		
+		File arq = new File("C:\\notas.txt");
+		
+		try {
+			FileReader fileReader = new FileReader(arq);
+			BufferedReader bufferedReader = new BufferedReader (fileReader);
+			String linha = "";
+			
+			while ( ( linha = bufferedReader.readLine() ) != null) {
+		        String[] resLinha = linha.split(", ");
+		        notas10 = Integer.parseInt(resLinha[0]);
+		        notas20 = Integer.parseInt(resLinha[1]);
+		        notas50 = Integer.parseInt(resLinha[2]);
+		        notas100 = Integer.parseInt(resLinha[3]);
+
+			}
+	        fileReader.close();
+	        bufferedReader.close();
+			
+		} catch (Exception e) {
+	    	e.printStackTrace();
+		}
+	}
+	
+	public void escreverNotas() {
+		Scanner ler = new Scanner(System.in);
+	    int n;
+
+	    FileWriter arq;
+		try {
+			arq = new FileWriter("c:\\notas.txt");
+		    PrintWriter gravarArq = new PrintWriter(arq);
+		    gravarArq.printf("%d, %d, %d, %d", notas10, notas20,notas50,notas100);   
+		    arq.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+	}
+	
+
 }

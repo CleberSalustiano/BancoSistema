@@ -12,6 +12,7 @@ public class Main {
 		ArrayList <Pessoa> pessoas = new ArrayList<>();
 		Pessoa pessoa = new Pessoa();
 		Dados dados = new Dados();
+		caixa.lerNotas();
 		dados.pessoasCadastradas(pessoas);
 		pessoa = menuLogin(pessoas, scan);
 		System.out.println("Bem vindo ao Caixa, " + pessoa.getNome());
@@ -21,6 +22,7 @@ public class Main {
 		}else {
 			escolhaOpcaoSemAutorizacao(scan,pessoa,caixa);
 		}
+		caixa.escreverNotas();
 
 	}
 	private static void escolhaOpcaoSemAutorizacao(Scanner scan, Pessoa pessoa, Caixa caixa) {
@@ -77,9 +79,7 @@ public class Main {
 			System.exit(0);
 		}
 		return pessoa.get(login[1]);
-
 	}
-
 	private static Integer[] confereEmailSenha(ArrayList<Pessoa> pessoa, String senha, String nomeEmail) {
 		Integer[] confere = {0,null};
 		for (int i = 0; i < pessoa.size() ; i ++) {
@@ -92,14 +92,6 @@ public class Main {
 		}
 		return  confere;
 	}
-
-	/*private static void verPessoasCadastradas(ArrayList <Pessoa> pessoa) {
-		for (int i = 0; i < pessoa.size() ; i ++) {
-			Pessoa pessoa1 = pessoa.get(i);
-			System.out.println(pessoa1);
-		}
-	}*/
-
 	private static void abastecerPermissao(Scanner scan, Caixa caixa) {
 		System.out.println("Para poder abastecer, digite o codigo de Seguranca");
 		String codigo = scan.next();
@@ -156,7 +148,7 @@ public class Main {
 		System.out.println("4 - Notas de 100.");
 	}
 	private static void menu (Pessoa pessoa) {
-		System.out.println("Escolha uma opção abaixo: ");
+		System.out.println("Escolha uma opï¿½ï¿½o abaixo: ");
 		if (pessoa.isAutorizacao()) {
 			System.out.println("1 - Sacar");
 			System.out.println("2 - Abastecer");
