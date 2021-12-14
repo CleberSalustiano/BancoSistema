@@ -1,6 +1,8 @@
-package BancoSistema;
+package Interface;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,10 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-public class Interface {
-		
-}
 
 class Login extends JFrame{
 	JTextField login;
@@ -47,10 +45,10 @@ class Login extends JFrame{
 		tlogin.setFont(font);
 		tretorno = new JLabel("");
 		
-		login.setBounds(140, 340, 300, 40);
-		senha.setBounds(140, 400, 300, 40);
-		entrar.setBounds(230, 450, 120, 20);
-		cadastro.setBounds(230, 480, 120, 20);
+		login.setBounds(140, 340, 300, 30);
+		senha.setBounds(140, 380, 300, 30);
+		entrar.setBounds(230, 420, 120, 30);
+		cadastro.setBounds(230, 460, 120, 30);
 		tlogin.setBounds(270, 300, 100, 30);
 		
 		add(login);
@@ -59,6 +57,17 @@ class Login extends JFrame{
 		add(tlogin);
 		add(entrar);
 		
+		ActionListener al = new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				String conta = login.getText();
+				char[] password = senha.getPassword();
+				
+			}
+			
+		};
+		
+		
 		setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -66,22 +75,3 @@ class Login extends JFrame{
 		
 	}
 }
-
-class MenuNormal extends JFrame{
-	
-	
-	
-	public MenuNormal() {
-		setLayout(null);
-
-		
-		setSize(600, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-	}
-}
-
-class MenuAbastecer extends JFrame{
-	
-}
-
