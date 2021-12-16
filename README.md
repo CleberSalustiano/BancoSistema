@@ -10,7 +10,11 @@ Além disso, se o valor estiver disponível, mas se não houver combinações po
 <br>
 O abastecimento só pode ser feito por quem é autorizado e possui o código de acesso. 
 <br>
-Os sistema possui um login onde habilita, ou não, o abastecimento no menu. Além disso, os dados tanto dos usuários quanto os valores do caixa, são salvos em um arquivo .txt.
+O sistema possui um login onde habilita, ou não, o abastecimento no menu. Além disso, os dados tanto dos usuários quanto os valores do caixa, são salvos em um arquivo .txt.
+<br>
+Possui também um processo de cadastro, sendo feito por console.
+<br>
+O sistema está em processo para Interface amigável ao usuário.
 <br>
 O intuito é treinar os conceitos estudados em Java Básico.
 <br>
