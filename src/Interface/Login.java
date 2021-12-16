@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -19,7 +18,6 @@ import javax.swing.JTextField;
 
 import BancoSistema.Caixa;
 import BancoSistema.Dados;
-import BancoSistema.LoginOuSenhaIncorretaException;
 import BancoSistema.Pessoa;
 
 class Login extends JFrame{
@@ -53,6 +51,7 @@ class Login extends JFrame{
 
 		login.setBounds(140, 340, 300, 30);
 		senha.setBounds(140, 380, 300, 30);
+		tretorno.setBounds(210, 500, 200, 20);
 		entrar.setBounds(230, 420, 120, 30);
 		cadastro.setBounds(230, 460, 120, 30);
 		tlogin.setBounds(270, 300, 100, 30);
@@ -61,12 +60,14 @@ class Login extends JFrame{
 		add(cadastro);
 		add(senha);
 		add(tlogin);
+		add(tretorno);
 		add(entrar);
 
-		entrar.addActionListener(new ActionListener(){
+		entrar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				Caixa caixa = new Caixa();
-				ArrayList <Pessoa> pessoas = new ArrayList<>();
+				ArrayList<Pessoa> pessoas = new ArrayList<>();
 				Pessoa pessoa = new Pessoa();
 				Dados dados = new Dados();
 				String conta = login.getText();
@@ -74,46 +75,47 @@ class Login extends JFrame{
 				String password = String.valueOf(passwordChar);
 				caixa.lerNotas();
 				dados.pessoasCadastradas(pessoas);
-				pessoa = menuLogin(pessoas, password, conta);
-
+				try {
+					pessoa = menuLogin(pessoas, password, conta);
+					MenuNormal menu = new MenuNormal(pessoa);
+					dispose();
+				} catch (Exception e2) {
+					tretorno.setText("Usuário e/ou senha inválidos");
+				}
 			}
 
 			private Pessoa menuLogin(ArrayList<Pessoa> pessoa, String password, String conta) {
 				Integer[] login = { 0, null };
-				int tentativa = 0;
-				while (login[0] == 0 && tentativa < 3) {
-					login = confereEmailSenha(pessoa, password, conta);
-					if (login[0] == 0) {
-						tentativa += 1;
-						try {
-							throw new LoginOuSenhaIncorretaException();
-						} catch (LoginOuSenhaIncorretaException e) {
-							System.out.println(e.getMessage());
-							System.out.println((3 - tentativa) + " Tentativas Restantes");
-						}
-					}
-				}
-				if (login[0] == 0) {
-					System.exit(0);
-				}
+				login = confereEmailSenha(pessoa, password, conta);
 				return pessoa.get(login[1]);
 			}
+
 			private Integer[] confereEmailSenha(ArrayList<Pessoa> pessoa, String senha, String nomeEmail) {
-				Integer[] confere = {0,null};
-				for (int i = 0; i < pessoa.size() ; i ++) {
+				Integer[] confere = { 0, null };
+				for (int i = 0; i < pessoa.size(); i++) {
 					Pessoa pessoa1 = pessoa.get(i);
-					if ((pessoa1.getConta().equals(nomeEmail)||pessoa1.getNome().equals(nomeEmail)) && pessoa1.getSenha().equals(senha)) {
+					if ((pessoa1.getConta().equals(nomeEmail) || pessoa1.getNome().equals(nomeEmail))
+							&& pessoa1.getSenha().equals(senha)) {
 						confere[0] = 1;
 						confere[1] = i;
-						return  confere;
+						return confere;
 					}
 				}
-				return  confere;
-			} 
+				return confere;
+			}
+
+		});
+		
+		cadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cadastro cadastro = new Cadastro();
+				dispose();
+			}
 		});
 		
 		setSize(600, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+
 }

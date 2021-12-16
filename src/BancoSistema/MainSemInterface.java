@@ -197,6 +197,5 @@ public class MainSemInterface {
 			System.out.println("1 - Sacar");
 			System.out.println("2 - Sair");
 		}
-
 	}
 }
