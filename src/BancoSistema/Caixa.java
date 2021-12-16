@@ -131,9 +131,6 @@ public class Caixa {
 	}
 	
 	public void escreverNotas() {
-		Scanner ler = new Scanner(System.in);
-	    int n;
-
 	    FileWriter arq;
 		try {
 			arq = new FileWriter("c:\\notas.txt");
