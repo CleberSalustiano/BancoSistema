@@ -8,10 +8,10 @@ public class Pessoa {
 	private boolean autorizacao = false;
 	private int saldo;
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return "Pessoa [conta=" + conta + ", senha=" + senha + "]";
-	}
+	}*/
 	
 	public boolean isAutorizacao() {
 		return autorizacao;
@@ -34,6 +34,7 @@ public class Pessoa {
 		this.saldo = saldo;
 	}
 
+	/*
 	public Pessoa(String nome, String conta, String senha, int saldo) {
 		super();
 		this.nome = nome;
@@ -41,6 +42,8 @@ public class Pessoa {
 		this.senha = senha;
 		this.saldo = saldo;
 	}
+	*/
+	
 	public String getNome() {
 		return nome;
 	}
