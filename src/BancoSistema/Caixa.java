@@ -6,10 +6,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Caixa {
-
+	Dados dados = new Dados();
+	
 	private String codigoSeguranca = "1234";
 	private int notas10 = 2;
 	private int notas20 = 1;
@@ -17,7 +19,7 @@ public class Caixa {
 	private int notas100 = 3;
 	private int total;
 	
-	public void liberanotas(int valorSaque, Pessoa pessoa) {
+	public void liberanotas(int valorSaque, Pessoa pessoa, ArrayList<Pessoa> pessoas) {
 		if (valorSaque > atualizaTotal()) {
 			try {
 				throw new ValorMaiorQueTotalException(atualizaTotal());
@@ -25,7 +27,7 @@ public class Caixa {
 				System.out.println(e.getMessage());
 			}
 		}else {
-			combinacaoNotas(valorSaque, pessoa);
+			combinacaoNotas(valorSaque, pessoa, pessoas);
 		}
 	}
 	public boolean confereCodigo(String codigo) {
@@ -33,7 +35,7 @@ public class Caixa {
 			return true;
 		else return false;
 	}	
-	private void combinacaoNotas (int valorSaque, Pessoa pessoa) {
+	private void combinacaoNotas (int valorSaque, Pessoa pessoa, ArrayList<Pessoa> pessoas) {
 		int valorSaqueaux = valorSaque;
 		int liberanotas10 = 0; 
 		int liberanotas20 = 0;
@@ -74,6 +76,7 @@ public class Caixa {
 			this.notas50 = notas50;
 			this.notas100 = notas100;
 			pessoa.liberaSaldo(valorSaqueaux);
+			dados.atualizaPessoa(pessoas, pessoa);
 			imprimiSaque(liberanotas10,liberanotas20,liberanotas50,liberanotas100, valorSaqueaux, pessoa.getSaldo());
 			
 		}
@@ -107,7 +110,7 @@ public class Caixa {
 	
 	public void lerNotas() {
 		
-		File arq = new File("C:\\notas.txt");
+		File arq = new File("notas.txt");
 		
 		try {
 			FileReader fileReader = new FileReader(arq);
@@ -133,7 +136,7 @@ public class Caixa {
 	public void escreverNotas() {
 	    FileWriter arq;
 		try {
-			arq = new FileWriter("c:\\notas.txt");
+			arq = new FileWriter("notas.txt");
 		    PrintWriter gravarArq = new PrintWriter(arq);
 		    gravarArq.printf("%d, %d, %d, %d", notas10, notas20,notas50,notas100);   
 		    arq.close();

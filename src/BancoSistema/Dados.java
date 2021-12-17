@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class Dados {
 
-	public void pessoasCadastradas(ArrayList<Pessoa> pessoa) {
-		File arq = new File("C:\\dados.txt");
+	public void pessoasCadastradas(ArrayList<Pessoa> pessoas) {
+		File arq = new File("dados.txt");
 
 		try {
 			FileReader fileReader = new FileReader(arq);
@@ -21,7 +21,7 @@ public class Dados {
 
 			while ((linha = bufferedReader.readLine()) != null) {
 				String[] resLinha = linha.split(", ");
-				pessoa.add(new Pessoa(resLinha[0], resLinha[1], resLinha[2], Boolean.parseBoolean(resLinha[4]),
+				pessoas.add(new Pessoa(resLinha[0], resLinha[1], resLinha[2], Boolean.parseBoolean(resLinha[4]),
 						Integer.parseInt(resLinha[3])));
 			}
 			fileReader.close();
@@ -33,7 +33,7 @@ public class Dados {
 
 	}
 
-	public void cadastrarPessoa(ArrayList<Pessoa> pessoa, Scanner scan) {
+	public void cadastrarPessoa(ArrayList<Pessoa> pessoas, Scanner scan) {
 		System.out.println("Informe seu nome: ");
 		String nome = scan.nextLine();
 		nome = scan.nextLine();
@@ -42,12 +42,27 @@ public class Dados {
 		System.out.println("Informe sua senha: ");
 		String senha = scan.nextLine();
 		try {
-			FileWriter arq = new FileWriter("C:\\dados.txt");
+			FileWriter arq = new FileWriter("dados.txt");
 			PrintWriter gravarArq = new PrintWriter(arq);
-			for (int i = 0; i < pessoa.size(); i++) {
-				gravarArq.printf("%s, %s, %s, %s, %b\n", pessoa.get(i).getNome(), pessoa.get(i).getConta(), pessoa.get(i).getSenha(), pessoa.get(i).getSaldo(), pessoa.get(i).isAutorizacao());
+			for (int i = 0; i < pessoas.size(); i++) {
+				gravarArq.printf("%s, %s, %s, %s, %b\n", pessoas.get(i).getNome(), pessoas.get(i).getConta(), pessoas.get(i).getSenha(), pessoas.get(i).getSaldo(), pessoas.get(i).isAutorizacao());
 			}
 			gravarArq.printf("%s, %s, %s, %s, %b\n", nome, email, senha, 2000, false);
+			arq.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void atualizaPessoa(ArrayList<Pessoa> pessoas,Pessoa pessoa) {
+		pessoas.set(pessoa.getID(), pessoa);
+		try {
+			FileWriter arq = new FileWriter("dados.txt");
+			PrintWriter gravarArq = new PrintWriter(arq);
+			for (int i = 0; i < pessoas.size(); i++) {
+				gravarArq.printf("%s, %s, %s, %s, %b\n", pessoas.get(i).getNome(), pessoas.get(i).getConta(), pessoas.get(i).getSenha(), pessoas.get(i).getSaldo(), pessoas.get(i).isAutorizacao());
+			}
 			arq.close();
 		} catch (IOException e) {
 			e.printStackTrace();

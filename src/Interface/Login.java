@@ -20,7 +20,7 @@ import BancoSistema.Caixa;
 import BancoSistema.Dados;
 import BancoSistema.Pessoa;
 
-class Login extends JFrame{
+class Login extends JFrame {
 	JTextField login;
 	JPasswordField senha;
 	JButton entrar;
@@ -84,10 +84,11 @@ class Login extends JFrame{
 				}
 			}
 
-			private Pessoa menuLogin(ArrayList<Pessoa> pessoa, String password, String conta) {
+			private Pessoa menuLogin(ArrayList<Pessoa> pessoas, String password, String conta) {
 				Integer[] login = { 0, null };
-				login = confereEmailSenha(pessoa, password, conta);
-				return pessoa.get(login[1]);
+				login = confereEmailSenha(pessoas, password, conta);
+				pessoas.get(login[1]).setID(login[1]);
+				return pessoas.get(login[1]);
 			}
 
 			private Integer[] confereEmailSenha(ArrayList<Pessoa> pessoa, String senha, String nomeEmail) {
@@ -103,19 +104,19 @@ class Login extends JFrame{
 				}
 				return confere;
 			}
-
 		});
 		
 		cadastro.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				Cadastro cadastro = new Cadastro();
 				dispose();
+				
 			}
 		});
-		
+
 		setSize(600, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-
 }
