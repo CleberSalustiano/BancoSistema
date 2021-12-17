@@ -3,51 +3,47 @@ package Interface;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import BancoSistema.Pessoa;
 
-class MenuNormal extends JFrame{
+class Sacar extends JFrame{
 	
 	JButton sacar, saldo, sair;
-	JLabel tBemVind, tsaldo; 
+	JLabel tBemVind, tsaldo, tsaque, tretorno; 
 	Font font = new Font("Arial", Font.PLAIN, 16);
+	JTextField saque;
 
 	
-	public MenuNormal(Pessoa pessoa) {
-		BufferedImage myPicture;
-		try {
-			myPicture = ImageIO.read(new File("banco.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			myPicture = null;
-		}
-		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-		add(picLabel);
-		picLabel.setBounds(170, 220, 240, 250);
+	public Sacar(Pessoa pessoa) {
 		setLayout(null);
 		sacar = new JButton("Sacar");
 		saldo = new JButton("Saldo");
 		sair = new JButton("Sair");
+		saque = new JTextField();
 		tBemVind = new JLabel("Bem vindo, " + pessoa.getNome());
 		tBemVind.setFont(font);
 		tsaldo= new JLabel("");
 		tsaldo.setFont(font);
+		tsaque = new JLabel("Digite o valor que deseja sacar: ");
+		tretorno = new JLabel("");
+		//tretorno.setFont(font);
+
 		
+		tsaque.setBounds(170, 230, 400, 40);
+		saque.setBounds(170, 270, 250, 40);
 		tsaldo.setBounds(170, 120, 400, 40);
 		tBemVind.setBounds(170, 40, 400, 40);
 		sacar.setBounds(170, 80, 70, 40);
 		saldo.setBounds(260, 80, 70, 40);
 		sair.setBounds(350, 80, 70, 40);
 		
+		add(tsaque);
+		add(saque);
 		add(sacar);
 		add(saldo);
 		add(sair);
@@ -56,8 +52,7 @@ class MenuNormal extends JFrame{
 		
 		sacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Sacar sacar = new Sacar(pessoa);
-				dispose();				
+				
 			}
 		});
 		saldo.addActionListener(new ActionListener() {

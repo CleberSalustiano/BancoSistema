@@ -18,9 +18,9 @@ public class MainSemInterface {
 		System.out.println("Bem vindo ao Caixa, " + pessoa.getNome());
 		menu(pessoa);
 		if (pessoa.isAutorizacao()) {
-			escolhaOpcaoAutorizada(scan, pessoa, caixa);
+			escolhaOpcaoAutorizada(scan, pessoa, caixa, pessoas);
 		} else {
-			escolhaOpcaoSemAutorizacao(scan, pessoa, caixa);
+			escolhaOpcaoSemAutorizacao(scan, pessoa, caixa, pessoas);
 		}
 		caixa.escreverNotas();
 
@@ -54,12 +54,12 @@ public class MainSemInterface {
 		System.out.println("3 - Sair");
 	}
 
-	private static void escolhaOpcaoSemAutorizacao(Scanner scan, Pessoa pessoa, Caixa caixa) {
+	private static void escolhaOpcaoSemAutorizacao(Scanner scan, Pessoa pessoa, Caixa caixa, ArrayList<Pessoa> pessoas) {
 		int opcao = scan.nextInt();
 		while (opcao != 2) {
 			switch (opcao) {
 			case 1:
-				sacar(scan, caixa, pessoa);
+				sacar(scan, caixa, pessoa, pessoas);
 				break;
 			default:
 				opcaoInexistente();
@@ -69,12 +69,12 @@ public class MainSemInterface {
 		}
 	}
 
-	private static void escolhaOpcaoAutorizada(Scanner scan, Pessoa pessoa, Caixa caixa) {
+	private static void escolhaOpcaoAutorizada(Scanner scan, Pessoa pessoa, Caixa caixa, ArrayList<Pessoa> pessoas) {
 		int opcao = scan.nextInt();
 		while (opcao != 3) {
 			switch (opcao) {
 			case 1:
-				sacar(scan, caixa, pessoa);
+				sacar(scan, caixa, pessoa, pessoas);
 				break;
 			case 2:
 				abastecerPermissao(scan, caixa);
@@ -87,7 +87,7 @@ public class MainSemInterface {
 		}
 	}
 
-	private static Pessoa menuLogin(ArrayList<Pessoa> pessoa, Scanner scan) {
+	private static Pessoa menuLogin(ArrayList<Pessoa> pessoas, Scanner scan) {
 		Integer[] login = { 0, null };
 		int tentativa = 0;
 		while (login[0] == 0 && tentativa < 3) {
@@ -96,7 +96,7 @@ public class MainSemInterface {
 			nomeEmail = scan.nextLine();
 			System.out.println("Digite sua senha:");
 			String senha = scan.nextLine();
-			login = confereEmailSenha(pessoa, senha, nomeEmail);
+			login = confereEmailSenha(pessoas, senha, nomeEmail);
 			if (login[0] == 0) {
 				tentativa += 1;
 				try {
@@ -110,7 +110,8 @@ public class MainSemInterface {
 		if (login[0] == 0) {
 			System.exit(0);
 		}
-		return pessoa.get(login[1]);
+		pessoas.get(login[1]).setID(login[1]);
+		return pessoas.get(login[1]);
 	}
 
 	private static Integer[] confereEmailSenha(ArrayList<Pessoa> pessoa, String senha, String nomeEmail) {
@@ -165,7 +166,7 @@ public class MainSemInterface {
 		}
 	}
 
-	private static void sacar(Scanner scan, Caixa caixa, Pessoa pessoa) {
+	private static void sacar(Scanner scan, Caixa caixa, Pessoa pessoa, ArrayList<Pessoa> pessoas) {
 		System.out.println("Digite a quantidade desejada para saque: ");
 		int valorSaque = scan.nextInt();
 		if (pessoa.getSaldo() < valorSaque) {
@@ -175,7 +176,7 @@ public class MainSemInterface {
 				System.out.println(e.getMessage());
 			}
 		} else {
-			caixa.liberanotas(valorSaque, pessoa);
+			caixa.liberanotas(valorSaque, pessoa, pessoas);
 		}
 	}
 

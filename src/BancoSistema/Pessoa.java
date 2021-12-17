@@ -1,7 +1,8 @@
 package BancoSistema;
 
 public class Pessoa {
-
+	
+	private int ID;
 	private String nome;
 	private String conta;
 	private String senha;
@@ -13,8 +14,17 @@ public class Pessoa {
 		return "Pessoa [conta=" + conta + ", senha=" + senha + "]";
 	}*/
 	
+	
 	public boolean isAutorizacao() {
 		return autorizacao;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
 	}
 
 	public void setAutorizacao(boolean autorizacao) {
