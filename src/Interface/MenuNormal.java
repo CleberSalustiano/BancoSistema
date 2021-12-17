@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -22,7 +23,7 @@ class MenuNormal extends JFrame{
 	Font font = new Font("Arial", Font.PLAIN, 16);
 
 	
-	public MenuNormal(Pessoa pessoa) {
+	public MenuNormal(Pessoa pessoa, ArrayList<Pessoa> pessoas) {
 		BufferedImage myPicture;
 		try {
 			myPicture = ImageIO.read(new File("banco.png"));
@@ -56,7 +57,7 @@ class MenuNormal extends JFrame{
 		
 		sacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Sacar sacar = new Sacar(pessoa);
+				Sacar sacar = new Sacar(pessoa, pessoas);
 				dispose();				
 			}
 		});

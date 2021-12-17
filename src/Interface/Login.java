@@ -77,7 +77,7 @@ class Login extends JFrame {
 				dados.pessoasCadastradas(pessoas);
 				try {
 					pessoa = menuLogin(pessoas, password, conta);
-					MenuNormal menu = new MenuNormal(pessoa);
+					MenuNormal menu = new MenuNormal(pessoa, pessoas);
 					dispose();
 				} catch (Exception e2) {
 					tretorno.setText("Usuário e/ou senha inválidos");
