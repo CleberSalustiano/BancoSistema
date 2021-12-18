@@ -1,6 +1,6 @@
 Carlos, carlos@email.com, 12345, 2000, false
 Arthur, arthur@email.com, 23456, 1200, false
-Cleber, cleber@email.com, 34567, 98760, false
+Cleber, cleber@email.com, 34567, 93840, false
 Joao, joao@email.com, 56789, 1325, false
 Banco, banco@abastecimento.com, 12345, 0, true
 Cleiton, bdegamer223@gmail.com, 12345, 2000, false
