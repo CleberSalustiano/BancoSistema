@@ -70,9 +70,7 @@ class Sacar extends JFrame{
 						tretorno.setText("Valor menor do que o saldo");
 					}
 				} else {
-					caixa.liberanotasInterface(valorSaque, pessoa, pessoas, tretorno);
-					
-					
+					caixa.liberanotasInterface(valorSaque, pessoa, pessoas, tretorno);		
 				}
 			}
 			

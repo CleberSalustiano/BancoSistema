@@ -1,5 +1,6 @@
 package Interface;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,11 +22,16 @@ import BancoSistema.Dados;
 import BancoSistema.Pessoa;
 
 class Login extends JFrame {
+	
+	public static void main(String[] args) {
+		Login login = new Login ();
+	}
+	
 	JTextField login;
 	JPasswordField senha;
 	JButton entrar;
 	JButton cadastro;
-	JLabel tlogin, tretorno;
+	JLabel tlogin, tretorno, tconta, tsenha;
 	Font font = new Font("Arial", Font.PLAIN, 20);
 
 	public Login() {
@@ -36,7 +42,6 @@ class Login extends JFrame {
 			add(picLabel);
 			picLabel.setBounds(170, 20, 240, 250);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -47,15 +52,21 @@ class Login extends JFrame {
 		cadastro = new JButton("Cadastre-se");
 		tlogin = new JLabel("Login");
 		tlogin.setFont(font);
+		tconta = new JLabel("Conta:");
+		tsenha = new JLabel ("Senha:");
 		tretorno = new JLabel("");
-
+		
 		login.setBounds(140, 340, 300, 30);
-		senha.setBounds(140, 380, 300, 30);
+		tconta.setBounds(140, 315, 300, 30);
+		tsenha.setBounds(140, 360, 300, 30);
+		senha.setBounds(140, 385, 300, 30);
 		tretorno.setBounds(210, 500, 200, 20);
-		entrar.setBounds(230, 420, 120, 30);
-		cadastro.setBounds(230, 460, 120, 30);
-		tlogin.setBounds(270, 300, 100, 30);
-
+		entrar.setBounds(230, 425, 120, 30);
+		cadastro.setBounds(230, 465, 120, 30);
+		tlogin.setBounds(270, 280, 100, 30);
+		
+		add(tconta);
+		add(tsenha);
 		add(login);
 		add(cadastro);
 		add(senha);
@@ -77,10 +88,16 @@ class Login extends JFrame {
 				dados.pessoasCadastradas(pessoas);
 				try {
 					pessoa = menuLogin(pessoas, password, conta);
-					MenuNormal menu = new MenuNormal(pessoa, pessoas);
-					dispose();
+					if (pessoa.isAutorizacao()) {
+						MenuAbastecer abastecer = new MenuAbastecer();
+						dispose();
+					}else {
+						MenuNormal menu = new MenuNormal(pessoa, pessoas);
+						dispose();	
+					}
 				} catch (Exception e2) {
 					tretorno.setText("Usuário e/ou senha inválidos");
+					tretorno.setForeground(Color.red);
 				}
 			}
 

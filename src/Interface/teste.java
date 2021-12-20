@@ -12,6 +12,7 @@ public class teste {
 		
 		Login login = new Login ();
 		
+		//Cadastro cadastro = new Cadastro();
 	}
 
 }
