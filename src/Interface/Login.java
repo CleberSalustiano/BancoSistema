@@ -22,6 +22,11 @@ import BancoSistema.Dados;
 import BancoSistema.Pessoa;
 
 class Login extends JFrame {
+	
+	public static void main(String[] args) {
+		Login login = new Login ();
+	}
+	
 	JTextField login;
 	JPasswordField senha;
 	JButton entrar;
@@ -37,7 +42,6 @@ class Login extends JFrame {
 			add(picLabel);
 			picLabel.setBounds(170, 20, 240, 250);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
