@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JLabel;
+
 public class Dados {
 
 	public void pessoasCadastradas(ArrayList<Pessoa> pessoas) {
@@ -33,7 +35,7 @@ public class Dados {
 
 	}
 
-	public void cadastrarPessoa(ArrayList<Pessoa> pessoas, Scanner scan) {
+	public boolean cadastrarPessoa(ArrayList<Pessoa> pessoas, Scanner scan) {
 		System.out.println("Informe seu nome: ");
 		String nome = scan.nextLine();
 		nome = scan.nextLine();
@@ -41,27 +43,67 @@ public class Dados {
 		String email = scan.nextLine();
 		System.out.println("Informe sua senha: ");
 		String senha = scan.nextLine();
-		try {
-			FileWriter arq = new FileWriter("dados.txt");
-			PrintWriter gravarArq = new PrintWriter(arq);
-			for (int i = 0; i < pessoas.size(); i++) {
-				gravarArq.printf("%s, %s, %s, %s, %b\n", pessoas.get(i).getNome(), pessoas.get(i).getConta(), pessoas.get(i).getSenha(), pessoas.get(i).getSaldo(), pessoas.get(i).isAutorizacao());
+		Boolean bool = false;
+		for (int i = 0; i < pessoas.size(); i++) {
+			if (email.equals(pessoas.get(i).getConta())) {
+				bool = true;
 			}
-			gravarArq.printf("%s, %s, %s, %s, %b\n", nome, email, senha, 2000, false);
-			arq.close();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
+		if (bool == true) {
+			System.out.println("Usuário já cadastrado");
+		} else {
+			try {
+				FileWriter arq = new FileWriter("dados.txt");
+				PrintWriter gravarArq = new PrintWriter(arq);
+				for (int i = 0; i < pessoas.size(); i++) {
+					gravarArq.printf("%s, %s, %s, %s, %b\n", pessoas.get(i).getNome(), pessoas.get(i).getConta(),
+							pessoas.get(i).getSenha(), pessoas.get(i).getSaldo(), pessoas.get(i).isAutorizacao());
+				}
+				gravarArq.printf("%s, %s, %s, %s, %b\n", nome, email, senha, 2000, false);
+				arq.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return bool;
 
 	}
 	
-	public void atualizaPessoa(ArrayList<Pessoa> pessoas,Pessoa pessoa) {
+	public String cadastrarPessoaInterface(ArrayList<Pessoa> pessoas, String nome, String email, String senha) {
+		Boolean bool = false;
+		for (int i = 0; i < pessoas.size(); i++) {
+			if (email.equals(pessoas.get(i).getConta())) {
+				bool = true;
+				break;
+			}			
+		}
+		if (bool == true) {
+			return "Email já cadastrado!";
+		} else {
+			try {
+				FileWriter arq = new FileWriter("dados.txt");
+				PrintWriter gravarArq = new PrintWriter(arq);
+				for (int i = 0; i < pessoas.size(); i++) {
+					gravarArq.printf("%s, %s, %s, %s, %b\n", pessoas.get(i).getNome(), pessoas.get(i).getConta(),
+							pessoas.get(i).getSenha(), pessoas.get(i).getSaldo(), pessoas.get(i).isAutorizacao());
+				}
+				gravarArq.printf("%s, %s, %s, %s, %b\n", nome, email, senha, 2000, false);
+				arq.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "Usuário cadastrado com sucesso!";
+		}
+	}
+
+	public void atualizaPessoa(ArrayList<Pessoa> pessoas, Pessoa pessoa) {
 		pessoas.set(pessoa.getID(), pessoa);
 		try {
 			FileWriter arq = new FileWriter("dados.txt");
 			PrintWriter gravarArq = new PrintWriter(arq);
 			for (int i = 0; i < pessoas.size(); i++) {
-				gravarArq.printf("%s, %s, %s, %s, %b\n", pessoas.get(i).getNome(), pessoas.get(i).getConta(), pessoas.get(i).getSenha(), pessoas.get(i).getSaldo(), pessoas.get(i).isAutorizacao());
+				gravarArq.printf("%s, %s, %s, %s, %b\n", pessoas.get(i).getNome(), pessoas.get(i).getConta(),
+						pessoas.get(i).getSenha(), pessoas.get(i).getSaldo(), pessoas.get(i).isAutorizacao());
 			}
 			arq.close();
 		} catch (IOException e) {

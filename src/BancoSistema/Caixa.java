@@ -178,6 +178,12 @@ public class Caixa {
 			System.out.println(quantidade + " notas de 100 abastecidos");
 		}
 	}
+	public void abastecerInterface(int notas10, int notas20, int notas50, int notas100) {
+		this.notas10 += notas10;
+		this.notas20 += notas20;
+		this.notas50 += notas50;
+		this.notas100 += notas100;
+	}
 
 	public void lerNotas() {
 
