@@ -56,8 +56,8 @@ class Login extends JFrame {
 		tsenha = new JLabel ("Senha:");
 		tretorno = new JLabel("");
 		
-		login.setBounds(140, 340, 300, 30);
-		tconta.setBounds(140, 315, 300, 30);
+		login.setBounds(140, 335, 300, 30);
+		tconta.setBounds(140, 310, 300, 30);
 		tsenha.setBounds(140, 360, 300, 30);
 		senha.setBounds(140, 385, 300, 30);
 		tretorno.setBounds(210, 500, 200, 20);
@@ -112,8 +112,7 @@ class Login extends JFrame {
 				Integer[] confere = { 0, null };
 				for (int i = 0; i < pessoa.size(); i++) {
 					Pessoa pessoa1 = pessoa.get(i);
-					if ((pessoa1.getConta().equals(nomeEmail) || pessoa1.getNome().equals(nomeEmail))
-							&& pessoa1.getSenha().equals(senha)) {
+					if ((pessoa1.getConta().equals(nomeEmail) && pessoa1.getSenha().equals(senha))) {
 						confere[0] = 1;
 						confere[1] = i;
 						return confere;
