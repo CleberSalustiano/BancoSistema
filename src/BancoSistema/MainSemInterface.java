@@ -23,7 +23,6 @@ public class MainSemInterface {
 			escolhaOpcaoSemAutorizacao(scan, pessoa, caixa, pessoas);
 		}
 		caixa.escreverNotas();
-
 	}
 
 	private static Pessoa firstMenu(ArrayList<Pessoa> pessoas, Scanner scan, Dados dados) {

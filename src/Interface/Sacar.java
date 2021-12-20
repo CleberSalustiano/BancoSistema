@@ -77,7 +77,7 @@ class Sacar extends JFrame{
 		});
 		saldo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tsaldo.setText("Saldo: " + pessoa.getSaldo());
+				tsaldo.setText("Saldo: R$" + pessoa.getSaldo() + ",00");
 			}
 		});
 		sair.addActionListener(new ActionListener() {

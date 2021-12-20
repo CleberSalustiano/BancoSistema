@@ -14,10 +14,10 @@ public class Caixa {
 	Dados dados = new Dados();
 
 	private String codigoSeguranca = "1234";
-	private int notas10 = 2;
-	private int notas20 = 1;
-	private int notas50 = 2;
-	private int notas100 = 3;
+	private int notas10;
+	private int notas20;
+	private int notas50;
+	private int notas100;
 	private int total;
 
 	public void liberanotas(int valorSaque, Pessoa pessoa, ArrayList<Pessoa> pessoas) {
@@ -38,7 +38,7 @@ public class Caixa {
 				throw new ValorMaiorQueTotalException(atualizaTotal());
 			} catch (ValorMaiorQueTotalException e) {
 				System.out.println(e.getMessage());
-				tretorno.setText("Valor de saque maior do que o existente em caixa");
+				tretorno.setText(e.getMessage());
 			}
 		} else {
 			combinacaoNotasInterface(valorSaque, pessoa, pessoas, tretorno);
