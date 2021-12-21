@@ -93,6 +93,7 @@ public class Caixa {
 			this.notas20 = notas20;
 			this.notas50 = notas50;
 			this.notas100 = notas100;
+			escreverNotas();
 			pessoa.liberaSaldo(valorSaqueaux);
 			dados.atualizaPessoa(pessoas, pessoa);
 			imprimiSaque(liberanotas10, liberanotas20, liberanotas50, liberanotas100, valorSaqueaux, pessoa.getSaldo());
@@ -141,6 +142,7 @@ public class Caixa {
 			this.notas20 = notas20;
 			this.notas50 = notas50;
 			this.notas100 = notas100;
+			escreverNotas();
 			pessoa.liberaSaldo(valorSaqueaux);
 			dados.atualizaPessoa(pessoas, pessoa);
 			imprimiSaque(liberanotas10, liberanotas20, liberanotas50, liberanotas100, valorSaqueaux, pessoa.getSaldo());
